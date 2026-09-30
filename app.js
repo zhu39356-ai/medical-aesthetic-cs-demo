@@ -45,7 +45,7 @@ const TREATMENTS = [
   },
   {
     id:"thermage", name:"Thermage® FLX 鳳凰電波", alias:"鳳凰電波", category:"電波",
-    keywords:["鬆弛","緊實","拉提","輪廓","皺紋","電波","下顎線","眼周","膠原蛋白"],
+    keywords:["鬆弛","緊實","拉提","輪廓","皺紋","細紋","法令紋","電波","下顎線","眼周","膠原蛋白"],
     summary:"以單極射頻為核心的非侵入式緊膚療程，公司公開資訊著重深層加熱、緊實與輪廓改善。",
     quickFacts:[
       "公司公開頁面將鳳凰電波描述為單極電波緊膚療程。",
@@ -87,7 +87,7 @@ const TREATMENTS = [
   },
   {
     id:"picosure", name:"PicoSure 755 蜂巢皮秒雷射", alias:"755nm 皮秒", category:"雷射",
-    keywords:["斑","色素","暗沉","毛孔","痘疤","凹疤","細紋","刺青","皮秒","雷射","膚色不均","恢復期"],
+    keywords:["斑","色素","暗沉","毛孔","痘疤","凹疤","細紋","皺紋","刺青","皮秒","雷射","膚色不均","恢復期"],
     summary:"755nm 皮秒雷射。公司公開頁面列出色素、暗沉、毛孔、痘疤／凹疤與細紋等常見諮詢方向。",
     quickFacts:[
       "皮秒指極短脈衝時間；不同雷射波長、模式與治療目標不同。",
@@ -586,7 +586,11 @@ function treatmentSearchText(t){
 }
 function filteredTreatments(){
   const q=knowledgeQuery.trim().toLowerCase();
-  return TREATMENTS.filter(t=>(knowledgeCategory==="全部"||t.category===knowledgeCategory)&&(!q||treatmentSearchText(t).includes(q)));
+  return TREATMENTS.filter(t=>{
+    const queryOK=!q || treatmentSearchText(t).includes(q);
+    const categoryOK=q ? true : (knowledgeCategory==="全部" || t.category===knowledgeCategory);
+    return queryOK && categoryOK;
+  });
 }
 function renderKnowledgeFilters(){
   const el=document.getElementById("knowledgeFilters");
@@ -627,7 +631,11 @@ function renderKnowledge(){
   if(copyBtn)copyBtn.addEventListener("click",async()=>{const text=[t.name,t.summary,"","客服可先回答："+(t.canAnswer||[]).join("、"),"需轉專業："+(t.mustRefer||[]).join("、")].join("\n");try{await navigator.clipboard.writeText(text);copyBtn.textContent="已複製";setTimeout(()=>copyBtn.textContent="複製速查摘要",1200);}catch(e){alert(text);}});
 }
 const knowledgeSearchEl=document.getElementById("knowledgeSearch");
-if(knowledgeSearchEl)knowledgeSearchEl.addEventListener("input",e=>{knowledgeQuery=e.target.value;renderKnowledge();});
+if(knowledgeSearchEl)knowledgeSearchEl.addEventListener("input",e=>{
+  knowledgeQuery=e.target.value;
+  if(knowledgeQuery.trim()) knowledgeCategory="全部";
+  renderKnowledge();
+});
 const knowledgeClearEl=document.getElementById("knowledgeClear");
 if(knowledgeClearEl)knowledgeClearEl.addEventListener("click",()=>{knowledgeQuery="";knowledgeCategory="全部";if(knowledgeSearchEl)knowledgeSearchEl.value="";renderKnowledge();});
 
