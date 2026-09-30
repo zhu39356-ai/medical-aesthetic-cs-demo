@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#331d12" />
-  <title>美無極｜線上客服管理中心 Concept Demo</title>
+  <title>美無極客服｜Concept Demo</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -41,6 +41,7 @@
 
   <nav class="tabs">
     <button class="tab active" data-tab="quick">快速工作</button>
+    <button class="tab" data-tab="knowledge">療程速查</button>
     <button class="tab" data-tab="work">完整工作台</button>
     <button class="tab" data-tab="stats">主管統計</button>
     <button class="tab" data-tab="shifts">班次紀錄</button>
@@ -61,6 +62,57 @@
         </div>
         <div class="quick-columns"><section class="panel"><div class="panel-head"><div><h3>正在服務</h3><p>只顯示目前處理中的客戶</p></div></div><div id="quickActiveList" class="quick-list"></div></section><section class="panel"><div class="panel-head"><div><h3>等待／待追蹤</h3><p>需要回來處理的案件</p></div></div><div id="quickWaitingList" class="quick-list"></div></section></div>
         <section class="panel quick-detail" id="quickDetail"><div class="empty small-empty"><div><h3>選擇一位客戶</h3><p>可快速加標籤、補備註、等待、追蹤、預約或結案。</p></div></div></section>
+      </div>
+    </section>
+
+
+    <section id="knowledgeTab" class="tabpage">
+      <div class="knowledge-shell">
+        <div class="knowledge-head">
+          <div>
+            <div class="eyebrow">TREATMENT QUICK LOOKUP</div>
+            <h2>醫美療程速查</h2>
+            <p>依美無極公開療程資訊與一般醫美固定知識整理；實際客服話術、價格、適應與禁忌仍以公司教育資料及醫師評估為準。</p>
+          </div>
+          <span class="knowledge-badge">Concept Demo</span>
+        </div>
+
+        <div class="panel knowledge-search-panel">
+          <div class="knowledge-search-row">
+            <input id="knowledgeSearch" type="search" placeholder="搜尋療程、設備、困擾或關鍵字，例如：毛孔、鬆弛、怕痛、乾燥、皮秒…" />
+            <button id="knowledgeClear" class="btn">清除</button>
+          </div>
+          <div id="knowledgeFilters" class="knowledge-filters"></div>
+          <div class="knowledge-hint">
+            可用「困擾反查」：例如搜尋「毛孔」會列出相關療程資料；搜尋結果只供客服快速確認資訊，不代表替客戶做醫療推薦。
+          </div>
+        </div>
+
+        <div class="knowledge-layout">
+          <section class="panel knowledge-list-panel">
+            <div class="panel-head">
+              <div>
+                <h3>療程清單</h3>
+                <p id="knowledgeResultCount">—</p>
+              </div>
+            </div>
+            <div id="knowledgeList" class="knowledge-list"></div>
+          </section>
+
+          <section class="panel knowledge-detail-panel" id="knowledgeDetail">
+            <div class="empty knowledge-empty">
+              <div>
+                <h3>選擇一個療程</h3>
+                <p>查看「30 秒看懂」、常見客問、客服可回答範圍與需要轉專業人員的情況。</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="knowledge-safety panel">
+          <strong>客服使用原則</strong>
+          <span>可協助說明公開療程資訊、院所與預約流程；涉及個人是否適合、疾病／藥物、異常術後反應、效果保證或精確療程建議時，應轉醫師或專業諮詢人員。</span>
+        </div>
       </div>
     </section>
 

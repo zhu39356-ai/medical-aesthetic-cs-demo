@@ -1,13 +1,13 @@
 {
-  "name": "線上客服管理中心 Concept Demo",
-  "short_name": "客服管理",
+  "name": "美無極客服",
+  "short_name": "美無極客服",
   "id": "./",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f7f2eb",
   "theme_color": "#331d12",
-  "description": "多通路客服案件、班次與轉化統計 Concept Demo",
+  "description": "美無極線上客服案件追蹤與療程速查 Concept Demo",
   "icons": [
     {
       "src": "icon.svg",

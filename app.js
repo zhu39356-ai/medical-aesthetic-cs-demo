@@ -1,5 +1,176 @@
 
 const TAGS = ["價格","預算有限","優惠／活動","效果","恢復期","疼痛","安全性","醫師經驗","診所環境","地點／交通","可預約時間","比較其他診所","需討論","第一次醫美"];
+
+const TREATMENT_CATEGORIES = ["全部","再生／注射","電波","音波","雷射","玻尿酸／膚質","再生保養"];
+
+const TREATMENTS = [
+  {
+    id:"profhilo", name:"PROFHILO® 逆時針", alias:"璞菲洛高低分子玻尿酸皮下植入劑", category:"再生／注射",
+    keywords:["鬆弛","乾燥","缺水","彈性","細紋","粗糙","頸紋","膚質","自然","不想填充","玻尿酸","生物重塑"],
+    summary:"以高低分子量透明質酸為核心的生物重塑注射概念，重點偏向膚質、彈性與整體肌膚狀態，而非傳統體積填補。",
+    quickFacts:[
+      "公司公開資訊將 PROFHILO 定位為生物重塑類注射，與一般以體積塑形為主的玻尿酸填充概念不同。",
+      "公開頁面提到常見關注包含乾燥、彈性下降、細紋、鬆弛與粗糙等。",
+      "臉部常見為固定注射點設計；實際施作部位、劑量與療程安排需由醫師評估。"
+    ],
+    questions:[
+      ["這跟玻尿酸填充一樣嗎？","可先說明：公司公開資訊將它定位為「生物重塑」，重點偏膚質與張力，不以輪廓體積填補為主要目的；實際差異與適合程度由醫師評估。"],
+      ["做完會不會腫？","公司公開頁面提到注射點可能短暫出現腫脹、隆起、壓痛或瘀青；若有明顯或持續異常，應轉醫療人員。"],
+      ["多久做一次？","客服可依公司最新教育資料說明一般安排，但不自行承諾固定次數或效果。"]
+    ],
+    canAnswer:["公司公開療程定位與一般流程","公開的院所／預約方式","一般性的常見短暫反應（避免保證）"],
+    mustRefer:["客戶是否適合施打","孕期、疾病、過敏、藥物等個人條件","注射後異常腫痛、感染或其他疑似併發症","效果保證、精確劑量與注射部位"],
+    sources:[["美無極：PROFHILO® 逆時針","https://www.timelessbeauty.com.tw/profhilo/"]]
+  },
+  {
+    id:"density", name:"Density RF 無雙電波", alias:"Jeisys Density RF", category:"電波",
+    keywords:["鬆弛","緊實","拉提","輪廓","細紋","毛孔","怕痛","電波","眼周","下顎線","恢復期"],
+    summary:"非侵入式電波緊實療程。美無極公開內容強調單極＋雙極交替、不同層次加熱與舒適度設計。",
+    quickFacts:[
+      "屬非侵入式電波能量療程，重點為緊實、拉提與膚質相關訴求。",
+      "公司頁面將它與鳳凰電波比較，強調能量模式、加熱層次與舒適度差異。",
+      "一般非侵入式緊膚設備可使用射頻或超音波等能量加熱較深層組織；實際療程次數與效果依設備、部位與個人條件不同。"
+    ],
+    questions:[
+      ["跟鳳凰電波差在哪？","可以依公司公開比較說明兩者能量設計與療程體驗不同，但不要自行判斷哪個一定比較適合客戶。"],
+      ["需要恢復期嗎？","公司公開頁面提到多數人可能只有短暫紅腫或壓痛；實際反應仍有個體差異。"],
+      ["怕痛可以做嗎？","可說明公司頁面有強調舒適度設計，但疼痛感受因人而異，能量設定仍由專業人員評估。"]
+    ],
+    canAnswer:["公開設備特色與療程分類","公司公開的一般恢復反應","院所與預約方式"],
+    mustRefer:["電波能量設定","客戶是否適合施作","植入物、皮膚狀況、疾病等禁忌判斷","異常疼痛或術後反應"],
+    sources:[
+      ["美無極：Density RF 無雙電波","https://www.timelessbeauty.com.tw/density-rf/"],
+      ["ASDS：非侵入式緊膚療程概念","https://www.asds.net/skin-experts/skin-treatments/non-invasive-skin-tightening-treatments"]
+    ]
+  },
+  {
+    id:"thermage", name:"Thermage® FLX 鳳凰電波", alias:"鳳凰電波", category:"電波",
+    keywords:["鬆弛","緊實","拉提","輪廓","皺紋","電波","下顎線","眼周","膠原蛋白"],
+    summary:"以單極射頻為核心的非侵入式緊膚療程，公司公開資訊著重深層加熱、緊實與輪廓改善。",
+    quickFacts:[
+      "公司公開頁面將鳳凰電波描述為單極電波緊膚療程。",
+      "與音波的能量來源不同：電波主要使用射頻能量；音波使用聚焦超音波。",
+      "非侵入式緊膚療程可能出現短暫紅、腫、瘀青等反應，恢復情況依個人與療程而異。"
+    ],
+    questions:[
+      ["跟音波一樣嗎？","不是同一種能量。電波主要使用射頻能量；音波使用聚焦超音波。兩者實際適合情況需醫師評估。"],
+      ["一次就有效嗎？","效果與出現時間會因人、設備與療程規劃不同，不應保證一次達到特定效果。"],
+      ["會很痛嗎？","可說明療程感受因人而異，設備有舒適度設計，但不應保證無痛。"]
+    ],
+    canAnswer:["電波與音波的基本能量差異","公司公開設備名稱與一般療程定位","預約與院所資訊"],
+    mustRefer:["客製能量與發數","個人適應性與禁忌","治療部位與實際效果判斷","術後異常反應"],
+    sources:[
+      ["美無極：Thermage® FLX 鳳凰電波","https://www.timelessbeauty.com.tw/thermage-flx/"],
+      ["ASDS：非侵入式緊膚療程概念","https://www.asds.net/skin-experts/skin-treatments/non-invasive-skin-tightening-treatments"]
+    ]
+  },
+  {
+    id:"ultraformer", name:"Ultraformer MPT 海芙音波媚必提", alias:"MPT 海芙音波", category:"音波",
+    keywords:["鬆弛","拉提","下顎線","雙下巴","音波","輪廓","緊實","身體","怕痛","探頭"],
+    summary:"聚焦式超音波緊實療程。公司公開頁面強調 MPT 微脈衝、不同深度探頭與臉部／身體的多部位應用。",
+    quickFacts:[
+      "能量來源為聚焦式超音波，與射頻電波不同。",
+      "公司公開資訊提到多種探頭深度與模式，實際搭配由專業人員依部位與需求規劃。",
+      "一般非侵入式緊膚療程的治療次數、效果與恢復狀況會依設備與個人需求不同。"
+    ],
+    questions:[
+      ["音波跟電波怎麼選？","可先解釋兩者能量來源不同；哪一種更適合要看鬆弛程度、部位與個人條件，應交由醫師評估。"],
+      ["可以打身體嗎？","公司公開頁面列有臉部與身體部位應用，但實際部位與療程安排仍由專業人員評估。"],
+      ["做完多久有效？","公司頁面描述效果可能逐步出現，但每個人的反應不同，客服不應承諾固定時間或幅度。"]
+    ],
+    canAnswer:["音波與電波基本差異","公司公開設備特色與部位分類","一般預約流程"],
+    mustRefer:["客戶是否適合","探頭深度、能量與發數","金屬／電子植入物等禁忌問題","術後異常疼痛、麻木或其他異常"],
+    sources:[
+      ["美無極：Ultraformer MPT 海芙音波媚必提","https://www.timelessbeauty.com.tw/ultraformer-mpt/"],
+      ["ASDS：非侵入式緊膚療程概念","https://www.asds.net/skin-experts/skin-treatments/non-invasive-skin-tightening-treatments"]
+    ]
+  },
+  {
+    id:"picosure", name:"PicoSure 755 蜂巢皮秒雷射", alias:"755nm 皮秒", category:"雷射",
+    keywords:["斑","色素","暗沉","毛孔","痘疤","凹疤","細紋","刺青","皮秒","雷射","膚色不均","恢復期"],
+    summary:"755nm 皮秒雷射。公司公開頁面列出色素、暗沉、毛孔、痘疤／凹疤與細紋等常見諮詢方向。",
+    quickFacts:[
+      "皮秒指極短脈衝時間；不同雷射波長、模式與治療目標不同。",
+      "公司公開頁面將 PicoSure 755 用於多種色素與膚質相關訴求。",
+      "雷射治療需要依膚色、皮膚狀況、用藥與既往病史評估；術前術後防曬很重要。"
+    ],
+    questions:[
+      ["可以打肝斑嗎？","公司公開頁面列有肝斑等色素問題，但肝斑成因與治療反應複雜，客服不應直接承諾適合或效果，應轉醫師評估。"],
+      ["毛孔、痘疤可以改善嗎？","可說明公司公開療程資訊有列入相關訴求，但實際疤痕類型與治療組合需專業評估。"],
+      ["做完會反黑嗎？","色素變化與個人膚色、日曬及治療設定有關，需由專業人員評估與說明；客服可提醒依醫囑做好術後照護與防曬。"]
+    ],
+    canAnswer:["公開療程可查詢的常見訴求","一般術前術後需重視防曬","院所與預約流程"],
+    mustRefer:["斑種判斷與是否適合雷射","膚色、病史、用藥與療程設定","術後水泡、持續疼痛、明顯色素變化等異常","治療次數與效果保證"],
+    sources:[
+      ["美無極：PicoSure 755 蜂巢皮秒雷射","https://www.timelessbeauty.com.tw/picosure-755/"],
+      ["AAD：雷射治療前的重要評估與防曬","https://www.aad.org/public/cosmetic/scars-stretch-marks/laser-treatment-scar"]
+    ]
+  },
+  {
+    id:"juvederm", name:"Juvéderm® 喬雅登玻尿酸", alias:"玻尿酸填充", category:"玻尿酸／膚質",
+    keywords:["玻尿酸","凹陷","輪廓","法令紋","下巴","唇","淚溝","填充","微整","腫","瘀青","自然"],
+    summary:"透明質酸（HA）填充劑系列，可依不同產品與核准用途處理體積、輪廓或皺褶等需求；實際產品與施打部位需醫師評估。",
+    quickFacts:[
+      "透明質酸是常見的可吸收型填充材料；不同產品有不同核准用途與特性。",
+      "常見短暫反應可包括紅、腫、瘀青、疼痛或壓痛。",
+      "填充注射有少見但嚴重的血管相關風險，因此必須由受過訓練的醫療專業人員評估與施作。"
+    ],
+    questions:[
+      ["玻尿酸可以打哪裡？","可以依公司公開產品資訊說明常見用途，但不是「哪裡凹就一定能打」；實際部位與產品選擇由醫師評估。"],
+      ["會不會很腫？","常見可有短暫紅腫、瘀青或疼痛，程度因人而異；持續或嚴重異常應立即回診。"],
+      ["可以維持多久？","不同產品、部位、劑型與個人體質差異很大，不應用單一數字對所有客戶保證。"]
+    ],
+    canAnswer:["透明質酸填充的基本概念","公司公開產品系列與一般用途","常見短暫注射反應"],
+    mustRefer:["實際施打部位、產品與劑量","疾病、過敏、藥物等風險評估","劇痛、皮膚顏色異常、視力異常等緊急警訊","效果與維持時間保證"],
+    sources:[
+      ["美無極：Juvéderm 喬雅登","https://www.timelessbeauty.com.tw/juvederm/"],
+      ["FDA：Dermal Fillers","https://www.fda.gov/medical-devices/aesthetic-cosmetic-devices/dermal-fillers-soft-tissue-fillers"]
+    ]
+  },
+  {
+    id:"skinvive", name:"SKINVIVE® 聚光針", alias:"Juvéderm SKINVIVE", category:"玻尿酸／膚質",
+    keywords:["乾燥","補水","光澤","膚質","細紋","玻尿酸","聚光針","保濕","平滑","不想改臉型"],
+    summary:"偏向膚質與保水訴求的透明質酸微滴注射概念，公司公開頁面強調平滑、水潤與光澤，而非大幅改變臉部體積。",
+    quickFacts:[
+      "屬透明質酸注射產品，訴求偏向膚質與保水，而非傳統輪廓填充。",
+      "公司公開頁面有列出面部、手部、頸部與胸口等資訊，但實際適用部位依仿單及醫師評估。",
+      "注射類產品仍有紅腫、瘀青、疼痛與少見嚴重併發症風險。"
+    ],
+    questions:[
+      ["跟一般玻尿酸差在哪？","可說明公司將 SKINVIVE 定位在膚質改善／保水方向，而一般填充劑可偏向結構與體積；實際產品選擇由醫師評估。"],
+      ["可以跟其他療程一起做嗎？","公司公開頁面有提到部分療程搭配資訊，但同日施作與間隔需依醫師評估，客服不應自行安排醫療組合。"],
+      ["做完可以化妝嗎？","公司公開頁面有術後注意資訊；實際仍應以診所當次衛教為準。"]
+    ],
+    canAnswer:["公司公開療程定位與一般術後衛教","與傳統填充概念的基本差異","院所與預約流程"],
+    mustRefer:["是否可與其他療程同日施作","客戶個人適合程度","注射後持續／嚴重異常","精確部位、劑量與效果"],
+    sources:[
+      ["美無極：SKINVIVE® 聚光針","https://www.timelessbeauty.com.tw/skinvive/"],
+      ["FDA：Dermal Fillers","https://www.fda.gov/medical-devices/aesthetic-cosmetic-devices/dermal-fillers-soft-tissue-fillers"]
+    ]
+  },
+  {
+    id:"exosome", name:"外泌體相關療程／產品", alias:"Exosome", category:"再生保養",
+    keywords:["外泌體","修護","術後","再生","保養","膚質","ExoCake","Exovia","ASCE"],
+    summary:"美無極官網有多項外泌體相關內容。此類資訊較容易隨產品、法規與公司教育更新，客服速查應以「公司目前核准說法」為主。",
+    quickFacts:[
+      "外泌體是細胞釋放的細胞外囊泡，研究領域涉及細胞間訊息傳遞。",
+      "醫美市場中的外泌體產品來源、法規定位與施作方式差異很大，不應只用「外泌體」三個字概括安全性或效果。",
+      "Demo 建議只整理公司目前實際使用產品、公開用途與客服可說範圍，不做療效保證。"
+    ],
+    questions:[
+      ["外泌體是什麼？","可以簡單說明為細胞釋放的微小囊泡、可攜帶多種訊息分子；實際產品用途與療程內容要依公司現行資料。"],
+      ["是不是可以修復所有問題？","不應這樣回答。產品與證據、用途差異很大，需以實際產品及專業評估為準。"],
+      ["跟雷射一起做嗎？","是否搭配、順序與間隔屬療程規劃問題，應轉醫師或專業諮詢人員。"]
+    ],
+    canAnswer:["公司目前公開的產品名稱與一般介紹","預約流程","最新公司衛教中允許客服說明的內容"],
+    mustRefer:["療效保證","與其他療程的搭配與施作方式","皮膚異常或術後問題","產品來源、法規與適應性判斷"],
+    sources:[
+      ["美無極：訊聯次世代外泌體","https://www.timelessbeauty.com.tw/exosome/"],
+      ["美無極：ExoCake 次世代","https://www.timelessbeauty.com.tw/exocake/"]
+    ]
+  }
+];
+
 const STORAGE_KEY = "med_aesthetic_cs_demo_v2";
 const SHIFT_KEY = "med_aesthetic_shift_v1";
 const SHIFT_HISTORY_KEY = "med_aesthetic_shift_history_v1";
@@ -9,6 +180,9 @@ let quickSelectedId = null;
 let quickChannel = "LINE";
 let statsPeriod = "today";
 let installPrompt = null;
+let knowledgeSelectedId = "profhilo";
+let knowledgeCategory = "全部";
+let knowledgeQuery = "";
 let state;
 state = loadState();
 
@@ -406,9 +580,61 @@ function updateLiveTime(){
 
 document.querySelectorAll(".period-btn").forEach(b=>b.addEventListener("click",()=>{statsPeriod=b.dataset.period;document.querySelectorAll(".period-btn").forEach(x=>x.classList.toggle("active",x===b));document.getElementById("statsDate").value="";renderStats();}));document.getElementById("statsDate").addEventListener("change",e=>{if(!e.target.value)return;statsPeriod="date:"+e.target.value;document.querySelectorAll(".period-btn").forEach(x=>x.classList.remove("active"));renderStats();});window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;const b=document.getElementById("installBtn");if(b)b.hidden=false;});document.getElementById("installBtn").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;document.getElementById("installBtn").hidden=true;}else{alert("iPhone/iPad：Safari → 分享 → 加入主畫面。Android：Chrome → 安裝應用程式／加入主畫面。需使用 HTTPS 網址開啟。");}});
 
+
+function treatmentSearchText(t){
+  return [t.name,t.alias,t.category,t.summary,...(t.keywords||[]),...(t.quickFacts||[]),...(t.canAnswer||[]),...(t.mustRefer||[]),...((t.questions||[]).flat())].join(" ").toLowerCase();
+}
+function filteredTreatments(){
+  const q=knowledgeQuery.trim().toLowerCase();
+  return TREATMENTS.filter(t=>(knowledgeCategory==="全部"||t.category===knowledgeCategory)&&(!q||treatmentSearchText(t).includes(q)));
+}
+function renderKnowledgeFilters(){
+  const el=document.getElementById("knowledgeFilters");
+  if(!el)return;
+  el.innerHTML=TREATMENT_CATEGORIES.map(c=>`<button class="knowledge-filter ${knowledgeCategory===c?"active":""}" data-kcat="${c}">${c}</button>`).join("");
+  el.querySelectorAll("[data-kcat]").forEach(btn=>btn.addEventListener("click",()=>{knowledgeCategory=btn.dataset.kcat;renderKnowledge();}));
+}
+function renderKnowledge(){
+  const listEl=document.getElementById("knowledgeList"),detailEl=document.getElementById("knowledgeDetail"),countEl=document.getElementById("knowledgeResultCount");
+  if(!listEl||!detailEl)return;
+  renderKnowledgeFilters();
+  const rows=filteredTreatments();
+  if(countEl)countEl.textContent=`找到 ${rows.length} 個項目`;
+  if(rows.length&&!rows.some(t=>t.id===knowledgeSelectedId))knowledgeSelectedId=rows[0].id;
+  listEl.innerHTML=rows.map(t=>`
+    <article class="knowledge-card ${knowledgeSelectedId===t.id?"active":""}" data-treatment="${t.id}">
+      <div class="knowledge-card-top"><div><h4>${t.name}</h4><div class="subname">${t.alias||""}</div></div><span class="knowledge-tag">${t.category}</span></div>
+      <div class="summary">${t.summary}</div>
+      <div class="knowledge-tags">${(t.keywords||[]).slice(0,5).map(k=>`<span class="knowledge-tag">${k}</span>`).join("")}</div>
+    </article>`).join("")||`<div class="empty small-empty"><div><h3>沒有符合的項目</h3><p>可以改用較短的關鍵字，例如「毛孔」「鬆弛」「乾燥」「怕痛」。</p></div></div>`;
+  listEl.querySelectorAll("[data-treatment]").forEach(card=>card.addEventListener("click",()=>{knowledgeSelectedId=card.dataset.treatment;renderKnowledge();}));
+  const t=TREATMENTS.find(x=>x.id===knowledgeSelectedId);
+  if(!t||!rows.some(x=>x.id===t.id)){detailEl.innerHTML=`<div class="empty knowledge-empty"><div><h3>選擇一個療程</h3><p>查看快速摘要與客服回答界線。</p></div></div>`;return;}
+  detailEl.innerHTML=`
+    <div class="knowledge-detail-top">
+      <div><div class="eyebrow">${t.category}</div><h2>${t.name}</h2><div class="category">${t.alias||""}</div></div>
+      <div class="knowledge-actions"><button class="btn" id="copyTreatmentBtn">複製速查摘要</button></div>
+    </div>
+    <div class="knowledge-detail-grid">
+      <section class="knowledge-block full"><h3>30 秒看懂</h3><p>${t.summary}</p><ul>${(t.quickFacts||[]).map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section class="knowledge-block"><h3>常見客問</h3><div class="knowledge-qa">${(t.questions||[]).map(([q,a])=>`<div class="knowledge-qa-item"><div class="knowledge-q">Q：${q}</div><div class="knowledge-a">${a}</div></div>`).join("")}</div></section>
+      <section class="knowledge-block"><h3>困擾／關鍵字</h3><div class="knowledge-tags">${(t.keywords||[]).map(k=>`<span class="knowledge-tag">${k}</span>`).join("")}</div></section>
+      <section class="knowledge-block knowledge-safe"><h3>客服可以先回答</h3><ul>${(t.canAnswer||[]).map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section class="knowledge-block knowledge-warning"><h3>需要轉醫師／專業諮詢</h3><ul>${(t.mustRefer||[]).map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section class="knowledge-block full"><h3>資料來源</h3><div class="knowledge-source-list">${(t.sources||[]).map(([label,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer">↗ ${label}</a>`).join("")}</div><div class="knowledge-updated">示範資料整理日期：2026/09/30。公司活動、價格、產品、院所與衛教內容可能變動，實際使用前應依最新內部資料更新。</div></section>
+    </div>`;
+  const copyBtn=document.getElementById("copyTreatmentBtn");
+  if(copyBtn)copyBtn.addEventListener("click",async()=>{const text=[t.name,t.summary,"","客服可先回答："+(t.canAnswer||[]).join("、"),"需轉專業："+(t.mustRefer||[]).join("、")].join("\n");try{await navigator.clipboard.writeText(text);copyBtn.textContent="已複製";setTimeout(()=>copyBtn.textContent="複製速查摘要",1200);}catch(e){alert(text);}});
+}
+const knowledgeSearchEl=document.getElementById("knowledgeSearch");
+if(knowledgeSearchEl)knowledgeSearchEl.addEventListener("input",e=>{knowledgeQuery=e.target.value;renderKnowledge();});
+const knowledgeClearEl=document.getElementById("knowledgeClear");
+if(knowledgeClearEl)knowledgeClearEl.addEventListener("click",()=>{knowledgeQuery="";knowledgeCategory="全部";if(knowledgeSearchEl)knowledgeSearchEl.value="";renderKnowledge();});
+
 function renderAll(){
   renderShift();
   renderQuick();
+  renderKnowledge();
   renderWorkKpis();
   renderCases();
   renderDetail();
