@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#331d12" />
+  <title>美無極｜線上客服管理中心 Concept Demo</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="brandbar">
+    <div class="brand-left">
+      <img class="brand-logo" src="brand-logo.png" alt="美無極品牌識別" />
+      <div class="brand-copy">
+        <div class="eyebrow light">CONCEPT DEMO · 模擬資料 · 非官方系統</div>
+        <h1>線上客服管理中心</h1>
+        <p>LINE / IG / FB / 官網 · 案件追蹤 · 服務計時 · 預約轉化 · 營運統計</p>
+      </div>
+    </div>
+
+    <div class="top-status">
+      <div class="clockbox">
+        <div class="clock-label">目前時間</div>
+        <div id="liveDate" class="clock-date">—</div>
+        <div id="liveClock" class="clock-time">--:--:--</div>
+      </div>
+
+      <div class="shiftbox">
+        <div class="shift-title">
+          <span class="dot" id="shiftDot"></span>
+          <strong id="shiftStatus">尚未開始班次</strong>
+        </div>
+        <div class="shift-line" id="shiftSince">—</div>
+        <div class="shift-line" id="shiftElapsed">本班 00:00:00</div>
+        <div class="shift-line subtle" id="lastShiftEnd">上次結束：—</div>
+        <button id="shiftBtn" class="btn primary">開始班次</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="quick">快速工作</button>
+    <button class="tab" data-tab="work">完整工作台</button>
+    <button class="tab" data-tab="stats">主管統計</button>
+    <button class="tab" data-tab="shifts">班次紀錄</button>
+    <button id="installBtn" class="install-btn" hidden>安裝 PWA</button>
+  </nav>
+
+  <main>
+    
+    <section id="quickTab" class="tabpage active">
+      <div class="quick-shell">
+        <div class="quick-top">
+          <div><div class="eyebrow">QUICK SERVICE</div><h2>快速客服模式</h2><p>適合單螢幕或手機使用。先建立案件，其他資訊可邊聊邊補。</p></div>
+          <div class="quick-clock"><span id="quickClock">--:--:--</span></div>
+        </div>
+        <div class="quick-create panel">
+          <div class="quick-channel-row"><button class="quick-channel active" data-qchannel="LINE">LINE</button><button class="quick-channel" data-qchannel="Instagram">IG</button><button class="quick-channel" data-qchannel="Facebook">FB</button><button class="quick-channel" data-qchannel="官網">官網</button></div>
+          <div class="quick-entry"><input id="quickCustomer" placeholder="客戶帳號／暱稱" autocomplete="off" /><select id="quickCategory"><option value="">諮詢主題</option><option>皮秒／雷射</option><option>音波／電波</option><option>除毛</option><option>微整注射</option><option>體雕</option><option>保養療程</option><option>價格／優惠</option><option>預約／改期</option><option>術後問題</option><option>其他</option></select><button id="quickStartBtn" class="btn primary">開始服務</button></div>
+        </div>
+        <div class="quick-columns"><section class="panel"><div class="panel-head"><div><h3>正在服務</h3><p>只顯示目前處理中的客戶</p></div></div><div id="quickActiveList" class="quick-list"></div></section><section class="panel"><div class="panel-head"><div><h3>等待／待追蹤</h3><p>需要回來處理的案件</p></div></div><div id="quickWaitingList" class="quick-list"></div></section></div>
+        <section class="panel quick-detail" id="quickDetail"><div class="empty small-empty"><div><h3>選擇一位客戶</h3><p>可快速加標籤、補備註、等待、追蹤、預約或結案。</p></div></div></section>
+      </div>
+    </section>
+
+    <section id="workTab" class="tabpage">
+      <div class="section-caption">
+        <div>
+          <div class="eyebrow">SERVICE DESK</div>
+          <h2>今日客服工作台</h2>
+        </div>
+        <div class="demo-note">目前為本機 Demo；資料會保留在此瀏覽器中。</div>
+      </div>
+
+      <div class="quick-add">
+        <button class="channel-btn" data-channel="LINE">＋ LINE</button>
+        <button class="channel-btn" data-channel="Instagram">＋ IG</button>
+        <button class="channel-btn" data-channel="Facebook">＋ FB</button>
+        <button class="channel-btn" data-channel="官網">＋ 官網</button>
+      </div>
+
+      <div class="kpis" id="workKpis"></div>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>我的案件</h2>
+              <p>處理中、等待客戶、待追蹤與今日案件</p>
+            </div>
+            <select id="caseFilter">
+              <option value="all">全部</option>
+              <option value="處理中">處理中</option>
+              <option value="等待客戶">等待客戶</option>
+              <option value="待追蹤">待追蹤</option>
+              <option value="已預約">已預約</option>
+              <option value="已結案">已結案</option>
+            </select>
+          </div>
+          <div id="caseList" class="case-list"></div>
+        </section>
+
+        <section class="panel detail" id="detailPanel">
+          <div class="empty">
+            <h3>選擇一筆案件</h3>
+            <p>查看客戶資訊、開始服務、等待客戶、追蹤、預約與結案。</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="statsTab" class="tabpage">
+      <div class="stats-head">
+        <div><div class="eyebrow">MANAGEMENT OVERVIEW</div><h2 id="statsTitle">今日營運概況</h2><p>預設只統計今天；歷史資料不刪除，可切換日期查看。</p></div>
+        <div class="stats-controls"><button class="period-btn active" data-period="today">今天</button><button class="period-btn" data-period="yesterday">昨天</button><button class="period-btn" data-period="7days">近 7 天</button><input id="statsDate" type="date" /><button id="seedBtn" class="btn">重載模擬資料</button></div>
+      </div>
+
+      <div class="kpis" id="statsKpis"></div>
+
+      <div class="stats-grid">
+        <section class="panel">
+          <h3>來源通路</h3>
+          <div id="channelStats" class="bars"></div>
+        </section>
+        <section class="panel">
+          <h3>諮詢問題</h3>
+          <div id="categoryStats" class="bars"></div>
+        </section>
+        <section class="panel">
+          <h3>客戶考量標籤</h3>
+          <div id="tagStats" class="bars"></div>
+        </section>
+        <section class="panel">
+          <h3>基本輪廓（僅依自願提供）</h3>
+          <div class="two-col">
+            <div>
+              <h4>性別</h4>
+              <div id="genderStats" class="bars compact"></div>
+            </div>
+            <div>
+              <h4>年齡層</h4>
+              <div id="ageStats" class="bars compact"></div>
+            </div>
+          </div>
+          <p class="note">未提供者保留「未知」，系統不推測性別或年齡。</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="shiftsTab" class="tabpage">
+      <div class="stats-head">
+        <div>
+          <div class="eyebrow">SHIFT HISTORY</div>
+          <h2>班次紀錄</h2>
+          <p>每次結束班次時，自動保存起訖時間與當下工作摘要。</p>
+        </div>
+      </div>
+      <div id="shiftHistory" class="shift-history"></div>
+    </section>
+  </main>
+
+  <dialog id="caseDialog">
+    <form method="dialog" id="caseForm">
+      <div class="dialog-head">
+        <div>
+          <div class="eyebrow">建立案件</div>
+          <h2 id="dialogTitle">新增案件</h2>
+        </div>
+        <button class="icon-btn" value="cancel" aria-label="關閉">×</button>
+      </div>
+      <input type="hidden" id="channelInput" />
+
+      <label>客戶識別 / 暱稱
+        <input id="customerInput" required placeholder="@帳號、LINE暱稱或姓名" />
+      </label>
+
+      <label>諮詢主題
+        <select id="categoryInput" required>
+          <option value="">請選擇</option>
+          <option>皮秒／雷射</option>
+          <option>音波／電波</option>
+          <option>除毛</option>
+          <option>微整注射</option>
+          <option>體雕</option>
+          <option>保養療程</option>
+          <option>價格／優惠</option>
+          <option>預約／改期</option>
+          <option>術後問題</option>
+          <option>其他</option>
+        </select>
+      </label>
+
+      <fieldset>
+        <legend>客戶在意點（可複選）</legend>
+        <div class="chips" id="tagChoices"></div>
+      </fieldset>
+
+      <div class="form-row">
+        <label>性別（選填）
+          <select id="genderInput">
+            <option>未知／未提供</option>
+            <option>女性</option>
+            <option>男性</option>
+            <option>其他／不便回答</option>
+          </select>
+        </label>
+        <label>年齡層（選填）
+          <select id="ageInput">
+            <option>未知／未提供</option>
+            <option>20歲以下</option>
+            <option>20–29</option>
+            <option>30–39</option>
+            <option>40–49</option>
+            <option>50–59</option>
+            <option>60歲以上</option>
+          </select>
+        </label>
+      </div>
+
+      <label>客服備註
+        <textarea id="notesInput" rows="4" placeholder="例如：第一次接觸醫美、在意恢復期、預算約1萬、希望週六下午。"></textarea>
+      </label>
+
+      <div class="dialog-actions">
+        <button class="btn" value="cancel">取消</button>
+        <button class="btn primary" id="createCaseBtn" value="default">建立並開始服務</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
