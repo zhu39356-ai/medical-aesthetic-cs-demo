@@ -2,285 +2,78 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#331d12" />
-  <title>美無極客服｜Concept Demo</title>
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#6b5cff" />
+  <meta name="description" content="13900 寵物美容丙級與寵物急救：共同科目不限題數、錯題複習、動物考點速記與模擬考 PWA" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>寵物美容丙級＋寵物急救｜刷題</title>
 </head>
 <body>
-  <header class="brandbar">
-    <div class="brand-left">
-      <img class="brand-logo" src="brand-logo.png" alt="美無極品牌識別" />
-      <div class="brand-copy">
-        <div class="eyebrow light">CONCEPT DEMO · 模擬資料 · 非官方系統</div>
-        <h1>線上客服管理中心</h1>
-        <p>LINE / IG / FB / 官網 · 案件追蹤 · 服務計時 · 預約轉化 · 營運統計</p>
-      </div>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">13900 寵物美容丙級 · 寵物急救 · v15.0</div>
+      <h1>我的刷題 PWA</h1>
     </div>
-
-    <div class="top-status">
-      <div class="clockbox">
-        <div class="clock-label">目前時間</div>
-        <div id="liveDate" class="clock-date">—</div>
-        <div id="liveClock" class="clock-time">--:--:--</div>
-      </div>
-
-      <div class="shiftbox">
-        <div class="shift-title">
-          <span class="dot" id="shiftDot"></span>
-          <strong id="shiftStatus">尚未開始班次</strong>
-        </div>
-        <div class="shift-line" id="shiftSince">—</div>
-        <div class="shift-line" id="shiftElapsed">本班 00:00:00</div>
-        <div class="shift-line subtle" id="lastShiftEnd">上次結束：—</div>
-        <button id="shiftBtn" class="btn primary">開始班次</button>
-      </div>
-    </div>
+    <button id="installBtn" class="ghost small" hidden>安裝到手機</button>
   </header>
 
-  <nav class="tabs">
-    <button class="tab active" data-tab="quick">快速工作</button>
-    <button class="tab" data-tab="knowledge">療程速查</button>
-    <button class="tab" data-tab="work">完整工作台</button>
-    <button class="tab" data-tab="stats">主管統計</button>
-    <button class="tab" data-tab="shifts">班次紀錄</button>
-    <button id="installBtn" class="install-btn" hidden>安裝 PWA</button>
-  </nav>
-
-  <main>
-    
-    <section id="quickTab" class="tabpage active">
-      <div class="quick-shell">
-        <div class="quick-top">
-          <div><div class="eyebrow">QUICK SERVICE</div><h2>快速客服模式</h2><p>適合單螢幕或手機使用。先建立案件，其他資訊可邊聊邊補。</p></div>
-          <div class="quick-clock"><span id="quickClock">--:--:--</span></div>
-        </div>
-        <div class="quick-create panel">
-          <div class="quick-channel-row"><button class="quick-channel active" data-qchannel="LINE">LINE</button><button class="quick-channel" data-qchannel="Instagram">IG</button><button class="quick-channel" data-qchannel="Facebook">FB</button><button class="quick-channel" data-qchannel="官網">官網</button></div>
-          <div class="quick-entry"><input id="quickCustomer" placeholder="客戶帳號／暱稱" autocomplete="off" /><select id="quickCategory"><option value="">諮詢主題</option><option>皮秒／雷射</option><option>音波／電波</option><option>除毛</option><option>微整注射</option><option>體雕</option><option>保養療程</option><option>價格／優惠</option><option>預約／改期</option><option>術後問題</option><option>其他</option></select><button id="quickStartBtn" class="btn primary">開始服務</button></div>
-        </div>
-        <div class="quick-columns"><section class="panel"><div class="panel-head"><div><h3>正在服務</h3><p>只顯示目前處理中的客戶</p></div></div><div id="quickActiveList" class="quick-list"></div></section><section class="panel"><div class="panel-head"><div><h3>等待／待追蹤</h3><p>需要回來處理的案件</p></div></div><div id="quickWaitingList" class="quick-list"></div></section></div>
-        <section class="panel quick-detail" id="quickDetail"><div class="empty small-empty"><div><h3>選擇一位客戶</h3><p>可快速加標籤、補備註、等待、追蹤、預約或結案。</p></div></div></section>
+  <main id="app" class="app-shell">
+    <section id="view-home" class="view active">
+      <div class="card" id="bootFallback">
+        <h3>v15.0 正在開啟題庫…</h3>
+        <p class="muted small-text">如果這段文字一直沒有消失，代表 JavaScript 沒有成功載入；請把畫面截圖給我，不要刪除學習資料。</p>
       </div>
     </section>
-
-
-    <section id="knowledgeTab" class="tabpage">
-      <div class="knowledge-shell">
-        <div class="knowledge-head">
-          <div>
-            <div class="eyebrow">TREATMENT QUICK LOOKUP</div>
-            <h2>醫美療程速查</h2>
-            <p>依美無極公開療程資訊與一般醫美固定知識整理；實際客服話術、價格、適應與禁忌仍以公司教育資料及醫師評估為準。</p>
-          </div>
-          <span class="knowledge-badge">Concept Demo</span>
-        </div>
-
-        <div class="panel knowledge-search-panel">
-          <div class="knowledge-search-row">
-            <input id="knowledgeSearch" type="search" placeholder="搜尋療程、設備、困擾或關鍵字，例如：毛孔、鬆弛、怕痛、乾燥、皮秒…" />
-            <button id="knowledgeClear" class="btn">清除</button>
-          </div>
-          <div id="knowledgeFilters" class="knowledge-filters"></div>
-          <div class="knowledge-hint">
-            可用「困擾反查」：例如搜尋「毛孔、皺紋、鬆弛、怕痛」會自動搜尋全部分類；結果只供客服快速確認資訊，不代表替客戶做醫療推薦。
-          </div>
-        </div>
-
-        <div class="knowledge-layout">
-          <section class="panel knowledge-list-panel">
-            <div class="panel-head">
-              <div>
-                <h3>療程清單</h3>
-                <p id="knowledgeResultCount">—</p>
-              </div>
-            </div>
-            <div id="knowledgeList" class="knowledge-list"></div>
-          </section>
-
-          <section class="panel knowledge-detail-panel" id="knowledgeDetail">
-            <div class="empty knowledge-empty">
-              <div>
-                <h3>選擇一個療程</h3>
-                <p>查看「30 秒看懂」、常見客問、客服可回答範圍與需要轉專業人員的情況。</p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div class="knowledge-safety panel">
-          <strong>客服使用原則</strong>
-          <span>可協助說明公開療程資訊、院所與預約流程；涉及個人是否適合、疾病／藥物、異常術後反應、效果保證或精確療程建議時，應轉醫師或專業諮詢人員。</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="workTab" class="tabpage">
-      <div class="section-caption">
-        <div>
-          <div class="eyebrow">SERVICE DESK</div>
-          <h2>今日客服工作台</h2>
-        </div>
-        <div class="demo-note">目前為本機 Demo；資料會保留在此瀏覽器中。</div>
-      </div>
-
-      <div class="quick-add">
-        <button class="channel-btn" data-channel="LINE">＋ LINE</button>
-        <button class="channel-btn" data-channel="Instagram">＋ IG</button>
-        <button class="channel-btn" data-channel="Facebook">＋ FB</button>
-        <button class="channel-btn" data-channel="官網">＋ 官網</button>
-      </div>
-
-      <div class="kpis" id="workKpis"></div>
-
-      <div class="grid">
-        <section class="panel">
-          <div class="panel-head">
-            <div>
-              <h2>我的案件</h2>
-              <p>處理中、等待客戶、待追蹤與今日案件</p>
-            </div>
-            <select id="caseFilter">
-              <option value="all">全部</option>
-              <option value="處理中">處理中</option>
-              <option value="等待客戶">等待客戶</option>
-              <option value="待追蹤">待追蹤</option>
-              <option value="已預約">已預約</option>
-              <option value="已結案">已結案</option>
-            </select>
-          </div>
-          <div id="caseList" class="case-list"></div>
-        </section>
-
-        <section class="panel detail" id="detailPanel">
-          <div class="empty">
-            <h3>選擇一筆案件</h3>
-            <p>查看客戶資訊、開始服務、等待客戶、追蹤、預約與結案。</p>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section id="statsTab" class="tabpage">
-      <div class="stats-head">
-        <div><div class="eyebrow">MANAGEMENT OVERVIEW</div><h2 id="statsTitle">今日營運概況</h2><p>預設只統計今天；歷史資料不刪除，可切換日期查看。</p></div>
-        <div class="stats-controls"><button class="period-btn active" data-period="today">今天</button><button class="period-btn" data-period="yesterday">昨天</button><button class="period-btn" data-period="7days">近 7 天</button><input id="statsDate" type="date" /><button id="seedBtn" class="btn">重載模擬資料</button></div>
-      </div>
-
-      <div class="kpis" id="statsKpis"></div>
-
-      <div class="stats-grid">
-        <section class="panel">
-          <h3>來源通路</h3>
-          <div id="channelStats" class="bars"></div>
-        </section>
-        <section class="panel">
-          <h3>諮詢問題</h3>
-          <div id="categoryStats" class="bars"></div>
-        </section>
-        <section class="panel">
-          <h3>客戶考量標籤</h3>
-          <div id="tagStats" class="bars"></div>
-        </section>
-        <section class="panel">
-          <h3>基本輪廓（僅依自願提供）</h3>
-          <div class="two-col">
-            <div>
-              <h4>性別</h4>
-              <div id="genderStats" class="bars compact"></div>
-            </div>
-            <div>
-              <h4>年齡層</h4>
-              <div id="ageStats" class="bars compact"></div>
-            </div>
-          </div>
-          <p class="note">未提供者保留「未知」，系統不推測性別或年齡。</p>
-        </section>
-      </div>
-    </section>
-
-    <section id="shiftsTab" class="tabpage">
-      <div class="stats-head">
-        <div>
-          <div class="eyebrow">SHIFT HISTORY</div>
-          <h2>班次紀錄</h2>
-          <p>每次結束班次時，自動保存起訖時間與當下工作摘要。</p>
-        </div>
-      </div>
-      <div id="shiftHistory" class="shift-history"></div>
-    </section>
+    <section id="view-study" class="view"></section>
+    <section id="view-review" class="view"></section>
+    <section id="view-exam" class="view"></section>
+    <section id="view-history" class="view"></section>
+    <section id="view-stats" class="view"></section>
+    <section id="view-settings" class="view"></section>
   </main>
 
-  <dialog id="caseDialog">
-    <form method="dialog" id="caseForm">
+  <nav class="bottom-nav" aria-label="主選單">
+    <button data-view="home" class="active"><span>⌂</span>今日</button>
+    <button data-view="study"><span>✎</span>刷題</button>
+    <button data-view="review"><span>↺</span>錯題</button>
+    <button data-view="exam"><span>✓</span>模考</button>
+    <button data-view="stats"><span>▦</span>統計</button>
+  </nav>
+
+  <dialog id="syncDialog">
+    <form method="dialog" class="dialog-card">
       <div class="dialog-head">
-        <div>
-          <div class="eyebrow">建立案件</div>
-          <h2 id="dialogTitle">新增案件</h2>
-        </div>
-        <button class="icon-btn" value="cancel" aria-label="關閉">×</button>
+        <div><div class="eyebrow">QUESTION BANK</div><h2>題庫同步／更新</h2></div>
+        <button value="cancel" class="icon-btn" aria-label="關閉">×</button>
       </div>
-      <input type="hidden" id="channelInput" />
-
-      <label>客戶識別 / 暱稱
-        <input id="customerInput" required placeholder="@帳號、LINE暱稱或姓名" />
-      </label>
-
-      <label>諮詢主題
-        <select id="categoryInput" required>
-          <option value="">請選擇</option>
-          <option>皮秒／雷射</option>
-          <option>音波／電波</option>
-          <option>除毛</option>
-          <option>微整注射</option>
-          <option>體雕</option>
-          <option>保養療程</option>
-          <option>價格／優惠</option>
-          <option>預約／改期</option>
-          <option>術後問題</option>
-          <option>其他</option>
-        </select>
-      </label>
-
-      <fieldset>
-        <legend>客戶在意點（可複選）</legend>
-        <div class="chips" id="tagChoices"></div>
-      </fieldset>
-
-      <div class="form-row">
-        <label>性別（選填）
-          <select id="genderInput">
-            <option>未知／未提供</option>
-            <option>女性</option>
-            <option>男性</option>
-            <option>其他／不便回答</option>
-          </select>
-        </label>
-        <label>年齡層（選填）
-          <select id="ageInput">
-            <option>未知／未提供</option>
-            <option>20歲以下</option>
-            <option>20–29</option>
-            <option>30–39</option>
-            <option>40–49</option>
-            <option>50–59</option>
-            <option>60歲以上</option>
-          </select>
-        </label>
+      <p class="muted">美容專業 647 題與寵物急救 80 題已直接內建。共同科目採老師提供的官方版本，第一輪不限每日題數、優先補完未做題，錯題可跨日累積；另新增題庫限定的動物產地／胸型／步態速記。學習紀錄保存在本機。</p>
+      <div id="syncStatus" class="sync-status"></div>
+      <div class="stack">
+        <button type="button" id="autoSyncBtn" class="primary">同步全部題庫</button>
+        <button type="button" id="repairProfessionalBtn" class="secondary">修復內建 647 題</button>
+        <button type="button" id="importProfessionalBtn" class="secondary">匯入新版 13900 題庫 PDF</button>
+        <input id="professionalFile" type="file" accept="application/pdf" hidden />
+        <button type="button" id="syncCommonBtn" class="secondary">重新載入老師版 4 科共同題庫</button>
       </div>
-
-      <label>客服備註
-        <textarea id="notesInput" rows="4" placeholder="例如：第一次接觸醫美、在意恢復期、預算約1萬、希望週六下午。"></textarea>
-      </label>
-
-      <div class="dialog-actions">
-        <button class="btn" value="cancel">取消</button>
-        <button class="btn primary" id="createCaseBtn" value="default">建立並開始服務</button>
-      </div>
+      <details>
+        <summary>題庫更新說明</summary>
+        <p>美容 647 題與 4 科共同科目已依老師提供的官方 PDF 重新匯入；環境保護第 30 題官方標示「本題刪題」，因此不會出題。急救題仍為自建練習題，並非官方考古題。永久排除清單與既有作答紀錄不會因題庫更新而消失。</p>
+        <a class="text-link" href="https://onlinetest.tw/btest/collection/13900/139003A13.pdf" target="_blank" rel="noreferrer">開啟 13900 公開題庫 PDF</a>
+      </details>
     </form>
   </dialog>
 
-  <script src="app.js"></script>
+  <dialog id="confirmDialog">
+    <form method="dialog" class="dialog-card compact">
+      <h3 id="confirmTitle">確認</h3>
+      <p id="confirmText" class="muted"></p>
+      <div class="row end"><button value="cancel" class="ghost">取消</button><button id="confirmOk" value="default" class="danger">確定</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script defer src="./app-v15.0.js?v=14.1"></script>
 </body>
 </html>
